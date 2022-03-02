@@ -1,0 +1,24 @@
+{
+  "name": "basic-discord-bot-template",
+  "version": "1.0.0",
+  "description": "A very easy template to use for your next Discord Bot.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mittelbots/basic-discord-bot-template/basic-discord-bot-template.git"
+  },
+  "author": "BlackDayz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mittelbots/basic-discord-bot-template/issues"
+  },
+  "homepage": "https://github.com/Mittelbots/basic-discord-bot-template#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "nodemon": "^2.0.15",
+    "simple-node-logger": "^21.8.12"
+  }
+}
