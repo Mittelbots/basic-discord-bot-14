@@ -31,19 +31,16 @@ bot.on("messageCreate", async message => {
 });
 
 bot.once('ready', async () => {
-    var codeLines;
-    await getLinesOfCode((cb) => {
-        setTimeout(() => {
-            return codeLines = ` | Lines of Code: ${cb}` || '';
-        }, 1000);
-    });
 
+  getLinesOfCode((cb) => {
     setTimeout(() => {
-        bot.user.setActivity({
-            name: activity.playing.name + codeLines || '',
-            type: activity.playing.type
-        });
-    }, 1100);
+      var codeLines = ` | Lines of Code: ${cb}` || '';
+      bot.user.setActivity({
+        name: config.activity.playing.name + ' ' +  version + codeLines,
+        type: config.activity.playing.type
+      });
+    }, 10000);
+  });
 
     console.log(`****Ready! Logged in as ${bot.user.tag}! I'm on ${bot.guilds.cache.size} Server****`);
 
