@@ -33,13 +33,11 @@ bot.on("messageCreate", async message => {
 bot.once('ready', async () => {
 
   getLinesOfCode((cb) => {
-    setTimeout(() => {
-      var codeLines = ` | Lines of Code: ${cb}` || '';
-      bot.user.setActivity({
-        name: config.activity.playing.name + ' ' +  version + codeLines,
-        type: config.activity.playing.type
-      });
-    }, 10000);
+    var codeLines = ` | Lines of Code: ${cb}` || '';
+    bot.user.setActivity({
+      name: activity.name + ' ' +  version + codeLines,
+      type: activity.type
+    });
   });
 
     console.log(`****Ready! Logged in as ${bot.user.tag}! I'm on ${bot.guilds.cache.size} Server****`);

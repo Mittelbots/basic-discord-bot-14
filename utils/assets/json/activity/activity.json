@@ -1,6 +1,4 @@
 {
-    "playing": {
-        "name": "Discord Bot",
-        "type": "PLAYING"
-    }
+    "name": "Discord Bot",
+    "type": "PLAYING"
 }
