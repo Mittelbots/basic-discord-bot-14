@@ -15,6 +15,7 @@ const { log } = require("./logs");
 const token = require('./_secret/token.json');
 const config = require('./utils/assets/json/_config/config.json');
 const activity = require('./utils/assets/json/activity/activity.json');
+const version = require('./package.json').version;
 
 const bot = new Discord.Client({
     intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_VOICE_STATES"],
