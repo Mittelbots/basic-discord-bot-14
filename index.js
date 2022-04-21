@@ -1,5 +1,10 @@
 //?MODULES --
-const Discord = require("discord.js");
+try {
+  var Discord = require("discord.js");
+}catch(err) {
+  console.error(`[ERROR] Please install all modules first by typing "npm install or npm i" in the terminal.`);
+  process.exit(1);
+}
 const { errorhandler } = require("./utils/functions/errorhandler/errorhandler");
 const { deployCommands } = require("./utils/functions/deployCommands/deployCommands");
 const { messageCreate } = require("./bot/events/messageCreate");
