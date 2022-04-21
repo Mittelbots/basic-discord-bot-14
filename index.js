@@ -45,8 +45,9 @@ bot.once('ready', async () => {
     if(config.debug) log.info('------------BOT SUCCESSFULLY STARTED------------', new Date());
 });
 
-bot.login(token.BOT_TOKEN);
-
+bot.login(token.BOT_TOKEN).catch(err => {
+  console.error(err);
+})
 
 //! ERROR --
 process.on('unhandledRejection', err => {
