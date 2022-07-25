@@ -1,11 +1,10 @@
 const { log } = require("../../../logs");
 const config = require('../../assets/json/_config/config.json');
 
-function errorhandler(err, message, channel) {
+function errorhandler({err, message, channel, fatal}) {
     if(config.debug) console.log(err);
-    else log.fatal(err);
-
-    if(channel && message) return channel.send(message); 
+    else if(fatal && log) log.fatal(err);
+    if(channel) return channel.send(message).catch(err => {});
     else return;
 }
 

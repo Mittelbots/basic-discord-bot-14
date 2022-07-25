@@ -1,6 +1,6 @@
 const config = require('../../utils/assets/json/_config/config.json');
 
-async function messageCreate(message, bot) {
+async function messageCreate({message, bot}) {
     if (message.author.bot) return;
     if (message.channel.type === "dm") return;
     if (message.author.system) return;
@@ -15,7 +15,7 @@ async function messageCreate(message, bot) {
         let commandfile = bot.commands.get(cmd.slice(config.defaultprefix.length));
 
         if (commandfile) { //&& blacklist(0, message)
-            return commandfile.run(bot, message, args);
+            return commandfile.run({bot, message, args});
         } else {
             return;
         }

@@ -2,5 +2,7 @@
     "Bot_Owner": "https://github.com/Mittelblut9",
     "Bot_Owner_ID": "395923095472570368",
     "defaultprefix": "!",
-    "debug": true
+    "debug": true,
+    "DISCORD_APPLICATION_ID": "966670074603798558",
+    "DEVELOPER_DISCORD_GUILD_ID": "951510366670684161"
 }

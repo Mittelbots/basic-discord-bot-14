@@ -1,6 +1,6 @@
 //?MODULES --
 try {
-  var Discord = require("discord.js");
+  var { Client, Options, GatewayIntentBits, Collection, ActivityType } = require("discord.js");
 }catch(err) {
   console.error(`[ERROR] Please install all modules first by typing "npm install or npm i" in the terminal.`);
   process.exit(1);
@@ -15,11 +15,13 @@ const { log } = require("./logs");
 const token = require('./_secret/token.json');
 const config = require('./utils/assets/json/_config/config.json');
 const activity = require('./utils/assets/json/activity/activity.json');
+const { createSlashCommands } = require("./utils/functions/deployCommands/deploySlashCommands");
+const { interactionCreate } = require("./bot/events/interactionCreate");
 const version = require('./package.json').version;
 
-const bot = new Discord.Client({
-    intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_VOICE_STATES"],
-    makeCache: Discord.Options.cacheWithLimits({
+const bot = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.MessageContent],
+    makeCache: Options.cacheWithLimits({
         MessageManager: 10,
         PresenceManager: 0,
         disableMentions: 'everyone'
@@ -29,11 +31,14 @@ const bot = new Discord.Client({
 
 bot.setMaxListeners(0);
 
-bot.commands = new Discord.Collection();
-deployCommands(bot);
+bot.commands = new Collection();
+deployCommands({bot});
+createSlashCommands();
+
+interactionCreate({bot});
 
 bot.on("messageCreate", async message => {
-    return await messageCreate(message, bot);
+    return await messageCreate({message, bot});
 });
 
 bot.once('ready', async () => {
@@ -42,7 +47,7 @@ bot.once('ready', async () => {
     var codeLines = ` | Lines of Code: ${cb}` || '';
     bot.user.setActivity({
       name: activity.name + ' ' +  version + codeLines,
-      type: activity.type
+      type: ActivityType.Playing // ActivityType.WATCHING, ActivityType.LISTENING, ActivityType.PLAYING
     });
   });
 
@@ -57,9 +62,9 @@ bot.login(token.BOT_TOKEN).catch(err => {
 
 //! ERROR --
 process.on('unhandledRejection', err => {
-    return errorhandler(err, null, null)
+    return errorhandler({err, fatal:true})
 });
 
 process.on('uncaughtException', err => {
-    return errorhandler(err, null, null)
+    return errorhandler({err, fatal:true})
 });
